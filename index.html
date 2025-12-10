@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dog Cards — Publisher Page (Draft)</title>
+  <title>Dog Cards — Publisher Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -16,154 +16,248 @@
       --bg-gradient: linear-gradient(135deg, #120018 0%, #24002b 50%, #0a0012 100%);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;color:#E8E4FF;background:var(--bg-gradient);}
-    .wrap{max-width:1100px;margin:36px auto;padding:28px}
-    
-        /* --- Swipeable screenshot carousel --- */
-    .ss-carousel {
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      display: flex;
-      border-radius: 12px;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
-    }
-    
-    .ss-inner {
-      display: flex;
-      gap: 12px;
-    }
-    
-    .ss-inner img {
-      width: 260px;
-      height: auto;
-      border-radius: 10px;
-      flex-shrink: 0;
-      scroll-snap-align: center;
-      border:1px solid rgba(255,255,255,0.06);
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
+      color:#E8E4FF;
+      background:var(--bg-gradient);
+      overflow-x:hidden;
     }
 
-    
+    /* Parallax spiral background */
+    .parallax-bg{
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at center, rgba(255,0,255,0.18), transparent 70%),
+        url("assets/spiral.png");
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:900px 900px, cover;
+      z-index:-1;
+      animation:spin 40s linear infinite;
+      filter:blur(4px) saturate(1.3);
+      opacity:.35;
+      transform:translateY(calc(var(--scroll, 0) * 0.2));
+      will-change:transform;
+    }
+    @keyframes spin{
+      from{transform:rotate(0deg) translateY(calc(var(--scroll, 0) * 0.2));}
+      to{transform:rotate(360deg) translateY(calc(var(--scroll, 0) * 0.2));}
+    }
+
+    .wrap{max-width:1100px;margin:36px auto;padding:28px}
+
     header{
       display:flex;
       align-items:center;
       gap:24px;
-      flex-wrap:wrap;          /* mobile-friendly */
+      flex-wrap:wrap;          /* prevent squish on small screens */
+      justify-content:flex-start;
     }
-
     .logo{
       width:92px;
       height:92px;
       border-radius:10px;
       overflow:hidden;
       box-shadow:0 6px 30px rgba(0,0,0,.6),0 0 16px var(--neon-magenta) inset;
-      flex-shrink:0;           /* prevents squishing */
+      flex-shrink:0;           /* don’t let logo squish */
     }
-
     .logo img{
       width:100%;
       height:100%;
       object-fit:cover;
       image-rendering:pixelated;
     }
-
-    @media(max-width:480px){
-      header{
-        justify-content:center;
-        text-align:center;
-      }
-      .title{
-        width:100%;
-      }
-    }
-
-    .parallax-bg {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255,0,255,0.12), transparent 70%),
-                  url('assets/spiral.png');
-      background-size: 900px 900px, cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      z-index: -1;
-      animation: spin 40s linear infinite;
-      filter: blur(4px) saturate(1.3);
-      opacity: 0.35;
-      transform: translateY(calc(var(--scroll, 0) * 0.2));
-      }
-    
-    @keyframes spin {
-      from { transform: rotate(0deg) scale(1); }
-      to   { transform: rotate(360deg) scale(1); }
-      }
-
-
     .title{line-height:1}
-    h1{font-family:Orbitron, sans-serif;color:var(--neon-magenta);font-size:44px;margin:0;text-shadow:0 0 18px rgba(255,0,255,.35)}
+    h1{
+      font-family:Orbitron, sans-serif;
+      color:var(--neon-magenta);
+      font-size:44px;
+      margin:0;
+      text-shadow:0 0 18px rgba(255,0,255,.35);
+    }
     p.lead{color:#D8D2FF;margin:6px 0 0}
 
-    .hero{display:grid;grid-template-columns:1fr 440px;gap:24px;margin-top:28px;align-items:start}
-    .card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:12px;backdrop-filter: blur(6px)}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 440px;
+      gap:24px;
+      margin-top:28px;
+      align-items:start;
+    }
+    .card{
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.04);
+      padding:18px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+    }
 
-    .video-wrap{position:relative;padding-top:56%;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.6)}
-    .video-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(123,47,255,.12), rgba(0,229,255,.06));}
-    .video-placeholder img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(1.05)}
+    .video-wrap{
+      position:relative;
+      padding-top:56%;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 12px 30px rgba(0,0,0,.6);
+    }
+    .video-wrap video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:10px;
+      display:block;
+    }
 
     .meta{display:flex;flex-direction:column;gap:12px}
     .meta .row{display:flex;gap:8px;align-items:center}
-    .pill{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--electric-violet),var(--neon-magenta));color:white;font-weight:600;font-size:13px}
-    .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--neon-magenta);color:#140019;font-weight:700;text-decoration:none;box-shadow:0 6px 24px rgba(255,0,255,.12)}
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--electric-violet),var(--neon-magenta));
+      color:white;
+      font-weight:600;
+      font-size:13px
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:10px;
+      background:var(--neon-magenta);
+      color:#140019;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 6px 24px rgba(255,0,255,.12);
+      white-space:nowrap;
+    }
 
-    section.features{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .feature{padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-    .feature h3{font-family:Orbitron;font-size:16px;color:var(--cyan-glow);margin:4px 0}
-    .feature p{font-size:14px;color:#ddd;margin:6px 0 0}
+    section.features{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px
+    }
+    .feature{
+      padding:12px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03)
+    }
+    .feature h3{
+      font-family:Orbitron;
+      font-size:16px;
+      color:var(--cyan-glow);
+      margin:4px 0
+    }
+    .feature p{
+      font-size:14px;
+      color:#ddd;
+      margin:6px 0 0
+    }
 
-    .screens{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .sshot{width:calc(33% - 8px);min-width:150px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.04)}
-    .sshot img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Swipeable screenshot carousel */
+    .ss-carousel{
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      display:flex;
+      border-radius:12px;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
+      padding-bottom:6px;
+    }
+    .ss-inner{
+      display:flex;
+      gap:12px;
+    }
+    .ss-inner img{
+      width:260px;
+      max-width:80vw;
+      border-radius:10px;
+      flex-shrink:0;
+      scroll-snap-align:center;
+      border:1px solid rgba(255,255,255,0.06);
+      display:block;
+    }
 
-    footer{margin-top:28px;text-align:center;color:#CFC9FF}
+    footer{
+      margin-top:28px;
+      text-align:center;
+      color:#CFC9FF
+    }
 
-    /* Press kit box */
-    .press-kit{margin-top:18px;display:flex;gap:12px;align-items:center}
-    .press-download{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:var(--soft-lilac);text-decoration:none}
+    .press-kit{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .press-download{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:10px 14px;
+      border-radius:8px;
+      color:var(--soft-lilac);
+      text-decoration:none;
+      font-size:14px;
+      white-space:nowrap;
+    }
 
     @media(max-width:900px){
       .hero{grid-template-columns:1fr}
       section.features{grid-template-columns:1fr 1fr}
-      .sshot{width:48%}
     }
     @media(max-width:560px){
       section.features{grid-template-columns:1fr}
-      .sshot{width:100%}
+      .press-kit{flex-direction:column;align-items:flex-start}
+      header{justify-content:flex-start;text-align:left}
+      .wrap{padding:18px}
     }
 
-    /* Neon animated underline */
-    .neon-underline{display:inline-block;position:relative}
-    .neon-underline:after{content:"";position:absolute;left:0;right:0;height:6px;bottom:-6px;background:linear-gradient(90deg,var(--neon-magenta),var(--cyan-glow));filter:blur(8px);opacity:.7;border-radius:6px}
+    .neon-underline{
+      display:inline-block;
+      position:relative;
+    }
+    .neon-underline:after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:6px;
+      bottom:-6px;
+      background:linear-gradient(90deg,var(--neon-magenta),var(--cyan-glow));
+      filter:blur(8px);
+      opacity:.7;
+      border-radius:6px;
+    }
   </style>
 </head>
 <body>
   <div class="parallax-bg"></div>
+
   <div class="wrap">
     <header>
-      <div class="logo"><img src="assets/logo.png" alt="Dog Cards logo (replace assets/logo.png)"></div>
+      <div class="logo">
+        <img src="assets/logo.png" alt="Dog Cards logo">
+      </div>
       <div class="title">
         <h1>Dog Cards</h1>
-        <p class="lead">A hypnotic neon card-battler — demo & press kit available for publishers.</p>
+        <p class="lead">A hypnotic neon card-battler — demo &amp; press kit available for publishers.</p>
       </div>
     </header>
 
     <div class="hero">
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
           <div>
             <div class="pill">Genre: Card-Battler / Roguelite</div>
             <div style="margin-top:10px;color:#DCD6FF">Engine: Godot 4 • Solo Developer</div>
           </div>
-          <div>
+          <div style="margin-left:auto">
             <a class="btn" href="mailto:josh@dogcardsgame.com?subject=Dog%20Cards%20Publisher%20Inquiry">Contact Developer</a>
           </div>
         </div>
@@ -171,20 +265,25 @@
         <hr style="border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);margin:14px 0">
 
         <div class="video-wrap">
-          <!-- Replace the image below with an MP4 poster or an iframe to Vimeo/YouTube -->
-          <div class="video-placeholder">
-            <img src="assets/trailer_placeholder.jpg" alt="Trailer placeholder (replace assets/trailer_placeholder.jpg)">
-          </div>
+          <video id="trailerVideo"
+                 src="assets/trailer.mp4"
+                 autoplay
+                 muted
+                 playsinline
+                 loop
+                 poster="assets/trailer_placeholder.jpg">
+          </video>
         </div>
 
         <div class="press-kit">
-          <a class="press-download" href="assets/Dog_Cards_Pitch_Deck.pdf" download>Download Pitch Deck (PDF)</a>
-          <a class="press-download" href="assets/Dog_Cards_Sell_Sheet.pdf" download>Download Sell Sheet (PDF)</a>
-          <a class="press-download" href="assets/presskit.zip" download>Download Full Press Kit (ZIP)</a>
+          <a class="press-download" href="assets/Dog_Cards_Pitch_Deck_NEON_LOGO.pdf" download>Download Pitch Deck (PDF)</a>
+          <a class="press-download" href="assets/Dog_Cards_Sell_Sheet_NEON_LOGO.pdf" download>Download Sell Sheet (PDF)</a>
+          <a class="press-download" href="assets/Dog_Cards_Press_Kit_LOGO.pdf" download>Download Press Kit (PDF)</a>
         </div>
 
-        <div style="margin-top:12px;color:#D6D0FF">Demo: <strong>Available on request</strong> — playable vertical slice showcasing combat, card effects, and UX flow.</div>
-
+        <div style="margin-top:12px;color:#D6D0FF">
+          Demo: <strong>Available on request</strong> — playable vertical slice showcasing combat, card effects, and UX flow.
+        </div>
       </div>
 
       <aside style="display:flex;flex-direction:column;gap:12px">
@@ -225,7 +324,6 @@
 
     <section id="screenshots" class="card" style="margin-top:18px">
       <h2 class="neon-underline" style="color:var(--soft-lilac);font-family:Orbitron">Screenshots</h2>
-    
       <div class="ss-carousel" id="ssCarousel">
         <div class="ss-inner">
           <img src="assets/ss1.jpg" alt="Screenshot 1">
@@ -235,23 +333,31 @@
       </div>
     </section>
 
-
     <footer>
       <p>Developer: Joshua Hillary • Email: josh@dogcardsgame.com</p>
     </footer>
   </div>
 
   <script>
-    // Small helper: if a video file trailer.mp4 is present in assets/, replace the placeholder with a video element.
-    (function(){
-      const videoPlaceholder = document.querySelector('.video-placeholder');
-      fetch('assets/trailer.mp4', {method:'HEAD'})
-        .then(r=>{ if(r.ok){
-          const v = document.createElement('video'); v.src='assets/trailer.mp4'; v.controls=true; v.autoplay=false; v.loop=false; v.style.width='100%'; v.style.height='100%'; v.style.objectFit='cover';
-          videoPlaceholder.innerHTML=''; videoPlaceholder.appendChild(v);
-        }})
-        .catch(()=>{});
-    })();
+    // Parallax scroll hook
+    window.addEventListener('scroll', () => {
+      document.documentElement.style.setProperty('--scroll', window.scrollY);
+    });
+
+    // Trailer autoplay fallback
+    document.addEventListener('DOMContentLoaded', () => {
+      const v = document.getElementById('trailerVideo');
+      if (v) {
+        const playPromise = v.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay blocked -> enable controls, unmute optional
+            v.controls = true;
+            v.muted = false;
+          });
+        }
+      }
+    });
   </script>
 </body>
 </html>
