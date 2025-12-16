@@ -10,35 +10,19 @@
       --neon-magenta:#FF00FF;
       --electric-violet:#7B2FFF;
       --cyan-glow:#00E5FF;
-      --deep-purple:#320045;
-      --dark-void:#140019;
       --soft-lilac:#A1A1FF;
       --bg-gradient: linear-gradient(135deg, #120018 0%, #24002b 50%, #0a0012 100%);
     }
     *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
-      color:#E8E4FF;
-      background:var(--bg-gradient);
-      overflow-x:hidden;
-    }
-
-    /* Parallax spiral background */
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;color:#E8E4FF;background:var(--bg-gradient);overflow-x:hidden;}
     .parallax-bg{
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at center, rgba(255,0,255,0.18), transparent 70%),
-        url("assets/spiral.png");
-      background-repeat:no-repeat;
-      background-position:center;
+      position:fixed; inset:0;
+      background: radial-gradient(circle at center, rgba(255,0,255,0.18), transparent 70%),
+                  url("assets/spiral.png");
+      background-repeat:no-repeat; background-position:center;
       background-size:900px 900px, cover;
-      z-index:-1;
-      animation:spin 40s linear infinite;
-      filter:blur(4px) saturate(1.3);
-      opacity:.35;
+      z-index:-1; animation:spin 40s linear infinite;
+      filter:blur(4px) saturate(1.3); opacity:.35;
       transform:translateY(calc(var(--scroll, 0) * 0.2));
       will-change:transform;
     }
@@ -46,166 +30,38 @@
       from{transform:rotate(0deg) translateY(calc(var(--scroll, 0) * 0.2));}
       to{transform:rotate(360deg) translateY(calc(var(--scroll, 0) * 0.2));}
     }
-
     .wrap{max-width:1100px;margin:36px auto;padding:28px}
-
-    header{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      flex-wrap:wrap;          /* prevent squish on small screens */
-      justify-content:flex-start;
-    }
-    .logo{
-      width:92px;
-      height:92px;
-      border-radius:10px;
-      overflow:hidden;
-      box-shadow:0 6px 30px rgba(0,0,0,.6),0 0 16px var(--neon-magenta) inset;
-      flex-shrink:0;           /* don’t let logo squish */
-    }
-    .logo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      image-rendering:pixelated;
-    }
-    .title{line-height:1}
-    h1{
-      font-family:Orbitron, sans-serif;
-      color:var(--neon-magenta);
-      font-size:44px;
-      margin:0;
-      text-shadow:0 0 18px rgba(255,0,255,.35);
-    }
+    header{display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:flex-start;}
+    .logo{width:92px;height:92px;border-radius:10px;overflow:hidden;box-shadow:0 6px 30px rgba(0,0,0,.6),0 0 16px var(--neon-magenta) inset;flex-shrink:0;}
+    .logo img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;}
+    h1{font-family:Orbitron,sans-serif;color:var(--neon-magenta);font-size:44px;margin:0;text-shadow:0 0 18px rgba(255,0,255,.35)}
     p.lead{color:#D8D2FF;margin:6px 0 0}
 
-    .hero{
-      display:grid;
-      grid-template-columns:1fr 440px;
-      gap:24px;
-      margin-top:28px;
-      align-items:start;
-    }
-    .card{
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.04);
-      padding:18px;
-      border-radius:12px;
-      backdrop-filter: blur(6px);
-    }
+    .hero{display:grid;grid-template-columns:1fr 440px;gap:24px;margin-top:28px;align-items:start}
+    .card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:12px;backdrop-filter: blur(6px)}
+    .pill{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--electric-violet),var(--neon-magenta));color:white;font-weight:600;font-size:13px}
 
-    .video-wrap{
-      position:relative;
-      padding-top:56%;
-      border-radius:10px;
-      overflow:hidden;
-      box-shadow:0 12px 30px rgba(0,0,0,.6);
-    }
-    .video-wrap video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:10px;
-      display:block;
-    }
+    .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--neon-magenta);color:#140019;font-weight:700;text-decoration:none;box-shadow:0 6px 24px rgba(255,0,255,.12);white-space:nowrap}
+    .video-wrap{position:relative;padding-top:56%;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.6)}
+    .video-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
 
-    .meta{display:flex;flex-direction:column;gap:12px}
-    .meta .row{display:flex;gap:8px;align-items:center}
-    .pill{
-      padding:6px 10px;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--electric-violet),var(--neon-magenta));
-      color:white;
-      font-weight:600;
-      font-size:13px
-    }
-    .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:10px;
-      background:var(--neon-magenta);
-      color:#140019;
-      font-weight:700;
-      text-decoration:none;
-      box-shadow:0 6px 24px rgba(255,0,255,.12);
-      white-space:nowrap;
-    }
+    .press-kit{margin-top:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .press-download{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:8px;color:var(--soft-lilac);text-decoration:none;font-size:14px;white-space:nowrap}
 
-    section.features{
-      margin-top:28px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px
-    }
-    .feature{
-      padding:12px;
-      background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.03)
-    }
-    .feature h3{
-      font-family:Orbitron;
-      font-size:16px;
-      color:var(--cyan-glow);
-      margin:4px 0
-    }
-    .feature p{
-      font-size:14px;
-      color:#ddd;
-      margin:6px 0 0
-    }
+    section.features{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .feature{padding:12px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.02));border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .feature h3{font-family:Orbitron;font-size:16px;color:var(--cyan-glow);margin:4px 0}
+    .feature p{font-size:14px;color:#ddd;margin:6px 0 0}
 
-    /* Swipeable screenshot carousel */
-    .ss-carousel{
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      display:flex;
-      border-radius:12px;
-      -webkit-overflow-scrolling:touch;
-      overscroll-behavior-x:contain;
-      padding-bottom:6px;
-    }
-    .ss-inner{
-      display:flex;
-      gap:12px;
-    }
-    .ss-inner img{
-      width:260px;
-      max-width:80vw;
-      border-radius:10px;
-      flex-shrink:0;
-      scroll-snap-align:center;
-      border:1px solid rgba(255,255,255,0.06);
-      display:block;
-    }
+    .neon-underline{display:inline-block;position:relative}
+    .neon-underline:after{content:"";position:absolute;left:0;right:0;height:6px;bottom:-6px;background:linear-gradient(90deg,var(--neon-magenta),var(--cyan-glow));filter:blur(8px);opacity:.7;border-radius:6px}
 
-    footer{
-      margin-top:28px;
-      text-align:center;
-      color:#CFC9FF
-    }
+    /* Swipeable screenshots */
+    .ss-carousel{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;display:flex;border-radius:12px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;padding-bottom:6px}
+    .ss-inner{display:flex;gap:12px}
+    .ss-inner img{width:260px;max-width:80vw;border-radius:10px;flex-shrink:0;scroll-snap-align:center;border:1px solid rgba(255,255,255,0.06);display:block}
 
-    .press-kit{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .press-download{
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      padding:10px 14px;
-      border-radius:8px;
-      color:var(--soft-lilac);
-      text-decoration:none;
-      font-size:14px;
-      white-space:nowrap;
-    }
+    footer{margin-top:28px;text-align:center;color:#CFC9FF}
 
     @media(max-width:900px){
       .hero{grid-template-columns:1fr}
@@ -214,25 +70,7 @@
     @media(max-width:560px){
       section.features{grid-template-columns:1fr}
       .press-kit{flex-direction:column;align-items:flex-start}
-      header{justify-content:flex-start;text-align:left}
       .wrap{padding:18px}
-    }
-
-    .neon-underline{
-      display:inline-block;
-      position:relative;
-    }
-    .neon-underline:after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      height:6px;
-      bottom:-6px;
-      background:linear-gradient(90deg,var(--neon-magenta),var(--cyan-glow));
-      filter:blur(8px);
-      opacity:.7;
-      border-radius:6px;
     }
   </style>
 </head>
@@ -241,12 +79,10 @@
 
   <div class="wrap">
     <header>
-      <div class="logo">
-        <img src="assets/logo.png" alt="Dog Cards logo">
-      </div>
+      <div class="logo"><img src="assets/logo.png" alt="Dog Cards logo"></div>
       <div class="title">
         <h1>Dog Cards</h1>
-        <p class="lead">A hypnotic neon card-battler — demo &amp; press kit available for publishers.</p>
+        <p class="lead">A neon card-battler inspired by the quiet strength of senior dogs — demo &amp; press kit available for publishers.</p>
       </div>
     </header>
 
@@ -271,26 +107,25 @@
                  muted
                  playsinline
                  loop
-                 poster="assets/trailer_placeholder.jpg">
-          </video>
+                 poster="assets/trailer_placeholder.jpg"></video>
         </div>
 
         <div class="press-kit">
-          <a class="press-download" href="assets/Dog_Cards_Pitch_Deck_NEON_LOGO.pdf" download>Download Pitch Deck (PDF)</a>
-          <a class="press-download" href="assets/Dog_Cards_Sell_Sheet_NEON_LOGO.pdf" download>Download Sell Sheet (PDF)</a>
-          <a class="press-download" href="assets/Dog_Cards_Press_Kit_LOGO.pdf" download>Download Press Kit (PDF)</a>
+          <a class="press-download" href="assets/Dog_Cards_Pitch_Deck_NEON_SENIOR.pdf" download>Download Pitch Deck (PDF)</a>
+          <a class="press-download" href="assets/Dog_Cards_Sell_Sheet_NEON_SENIOR.pdf" download>Download Sell Sheet (PDF)</a>
+          <a class="press-download" href="assets/Dog_Cards_Press_Kit_NEON_SENIOR.pdf" download>Download Press Kit (PDF)</a>
         </div>
 
         <div style="margin-top:12px;color:#D6D0FF">
-          Demo: <strong>Available on request</strong> — playable vertical slice showcasing combat, card effects, and UX flow.
+          Demo: <strong>Available on request</strong> — a polished vertical slice showcasing combat feel, card effects, and UX flow.
         </div>
       </div>
 
       <aside style="display:flex;flex-direction:column;gap:12px">
-        <div class="card meta">
-          <div class="row"><strong>Platforms:</strong><span style="margin-left:auto;color:#DCD6FF">PC (Steam), Switch, PS, Xbox</span></div>
-          <div class="row"><strong>Price:</strong><span style="margin-left:auto;color:#DCD6FF">$10–$15</span></div>
-          <div class="row"><strong>Players:</strong><span style="margin-left:auto;color:#DCD6FF">Single-player</span></div>
+        <div class="card">
+          <div style="display:flex;gap:8px;align-items:center"><strong>Platforms:</strong><span style="margin-left:auto;color:#DCD6FF">PC (Steam), Switch, PS, Xbox</span></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><strong>Price:</strong><span style="margin-left:auto;color:#DCD6FF">$10–$15</span></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><strong>Players:</strong><span style="margin-left:auto;color:#DCD6FF">Single-player</span></div>
           <div style="margin-top:12px">
             <a class="btn" href="#screenshots">View Screenshots</a>
           </div>
@@ -299,7 +134,7 @@
         <div class="card" style="padding:12px">
           <h3 style="margin:0;color:var(--neon-magenta);font-family:Orbitron">Key Stats</h3>
           <ul style="margin:8px 0 0;padding-left:18px;color:#E8E4FF">
-            <li>Vertical slice: combat + 12 cards</li>
+            <li>Vertical slice: combat + starter card set</li>
             <li>Planned cards: 100+</li>
             <li>Estimated dev time remaining: 6–9 months</li>
           </ul>
@@ -310,25 +145,33 @@
     <section class="features">
       <div class="feature card">
         <h3>Visual Identity</h3>
-        <p>Neon-hypnotic aesthetic with chromatic title effects and spiral backgrounds that give the game a unique shelf presence.</p>
+        <p>Neon-hypnotic aesthetic with spiral energy and chromatic glow for strong shelf presence.</p>
       </div>
       <div class="feature card">
         <h3>Gameplay Loop</h3>
-        <p>Quick, strategic sessions focused on card synergies, risk/reward, and deckbuilding progression.</p>
+        <p>Quick, strategic sessions focused on card synergies, risk/reward, and progression.</p>
       </div>
       <div class="feature card">
-        <h3>Publisher Fit</h3>
-        <p>Low dev cost, high replayability, and strong visual branding make Dog Cards ideal for mid-tier publishers and digital-first releases.</p>
+        <h3>Inspired by Senior Dogs</h3>
+        <p>Cards reflect senior-dog behaviors—patience, resilience, warmth—bringing meaning without slowing the pace.</p>
       </div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2 style="margin:0 0 8px 0;color:var(--soft-lilac);font-family:Orbitron">The Heart of the Game</h2>
+      <p style="margin:0;color:#D8D2FF">
+        Dog Cards is inspired by the quiet strength of senior dogs. Each card draws from behaviors you see in older pups—gentle persistence,
+        surprising bursts of play, and the kind of loyalty that only deepens with time. It’s a bold neon card-battler with a warm, uplifting core.
+      </p>
     </section>
 
     <section id="screenshots" class="card" style="margin-top:18px">
       <h2 class="neon-underline" style="color:var(--soft-lilac);font-family:Orbitron">Screenshots</h2>
-      <div class="ss-carousel" id="ssCarousel">
+      <div class="ss-carousel">
         <div class="ss-inner">
-          <img src="assets/ss1.gif" alt="Screenshot 1">
-          <img src="assets/ss2.gif" alt="Screenshot 2">
-          <img src="assets/ss3.gif" alt="Screenshot 3">
+          <img src="assets/ss1.jpg" alt="Screenshot 1">
+          <img src="assets/ss2.jpg" alt="Screenshot 2">
+          <img src="assets/ss3.jpg" alt="Screenshot 3">
         </div>
       </div>
     </section>
@@ -339,22 +182,16 @@
   </div>
 
   <script>
-    // Parallax scroll hook
     window.addEventListener('scroll', () => {
       document.documentElement.style.setProperty('--scroll', window.scrollY);
     });
 
-    // Trailer autoplay fallback
     document.addEventListener('DOMContentLoaded', () => {
       const v = document.getElementById('trailerVideo');
       if (v) {
-        const playPromise = v.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Autoplay blocked -> enable controls, unmute optional
-            v.controls = true;
-            v.muted = false;
-          });
+        const p = v.play();
+        if (p !== undefined) {
+          p.catch(() => { v.controls = true; v.muted = false; });
         }
       }
     });
